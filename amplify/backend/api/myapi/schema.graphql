@@ -1,0 +1,17 @@
+type Todo @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  name: String!
+  description: String
+}
+
+type SlangProfile @model @auth(rules: [{allow: private}]) {
+	id: ID!
+	profilePictureKey: String
+	picture1Key: String
+	picture2Key: String
+	picture3Key: String
+	name: String!
+	age: Int!
+	isActive: Boolean!
+	matches: [ID!]!
+} 
