@@ -1,71 +1,424 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getTodo = /* GraphQL */ `
-  query GetTodo($id: ID!) {
-    getTodo(id: $id) {
-      id
-      name
-      description
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listTodos = /* GraphQL */ `
-  query ListTodos(
-    $filter: ModelTodoFilterInput
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        profilePictureKey
         name
-        description
+        age
+        xp
+        username
+        isActive
         createdAt
         updatedAt
+        owner
+        experiences {
+          nextToken
+        }
+        requests {
+          nextToken
+        }
+        sentRequests {
+          nextToken
+        }
+        follows {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
       }
       nextToken
     }
   }
 `;
-export const getSlangProfile = /* GraphQL */ `
-  query GetSlangProfile($id: ID!) {
-    getSlangProfile(id: $id) {
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
       id
       profilePictureKey
-      picture1Key
-      picture2Key
-      picture3Key
       name
       age
+      xp
+      username
       isActive
-      matches
       createdAt
       updatedAt
+      owner
+      experiences {
+        items {
+          id
+          ownerID
+          name
+          pictureKey
+          story
+          tags
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      requests {
+        items {
+          id
+          fromID
+          toID
+          requestedOn
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      sentRequests {
+        items {
+          id
+          fromID
+          toID
+          requestedOn
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      follows {
+        items {
+          id
+          byID
+          whoID
+          requestedOn
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      followers {
+        items {
+          id
+          byID
+          whoID
+          requestedOn
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
-export const listSlangProfiles = /* GraphQL */ `
-  query ListSlangProfiles(
-    $filter: ModelSlangProfileFilterInput
+export const getExperience = /* GraphQL */ `
+  query GetExperience($id: ID!) {
+    getExperience(id: $id) {
+      id
+      ownerID
+      name
+      location {
+        lat
+        lon
+      }
+      pictureKey
+      story
+      tags
+      createdAt
+      updatedAt
+      owner {
+        id
+        profilePictureKey
+        name
+        age
+        xp
+        username
+        isActive
+        createdAt
+        updatedAt
+        owner
+        experiences {
+          nextToken
+        }
+        requests {
+          nextToken
+        }
+        sentRequests {
+          nextToken
+        }
+        follows {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const listExperiences = /* GraphQL */ `
+  query ListExperiences(
+    $filter: ModelExperienceFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listSlangProfiles(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listExperiences(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        profilePictureKey
-        picture1Key
-        picture2Key
-        picture3Key
+        ownerID
         name
-        age
-        isActive
-        matches
+        location {
+          lat
+          lon
+        }
+        pictureKey
+        story
+        tags
         createdAt
         updatedAt
+        owner {
+          id
+          profilePictureKey
+          name
+          age
+          xp
+          username
+          isActive
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getFollowRequest = /* GraphQL */ `
+  query GetFollowRequest($id: ID!) {
+    getFollowRequest(id: $id) {
+      id
+      fromID
+      toID
+      requestedOn
+      createdAt
+      updatedAt
+      from {
+        id
+        profilePictureKey
+        name
+        age
+        xp
+        username
+        isActive
+        createdAt
+        updatedAt
+        owner
+        experiences {
+          nextToken
+        }
+        requests {
+          nextToken
+        }
+        sentRequests {
+          nextToken
+        }
+        follows {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+      }
+      to {
+        id
+        profilePictureKey
+        name
+        age
+        xp
+        username
+        isActive
+        createdAt
+        updatedAt
+        owner
+        experiences {
+          nextToken
+        }
+        requests {
+          nextToken
+        }
+        sentRequests {
+          nextToken
+        }
+        follows {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const listFollowRequests = /* GraphQL */ `
+  query ListFollowRequests(
+    $filter: ModelFollowRequestFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listFollowRequests(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        fromID
+        toID
+        requestedOn
+        createdAt
+        updatedAt
+        from {
+          id
+          profilePictureKey
+          name
+          age
+          xp
+          username
+          isActive
+          createdAt
+          updatedAt
+          owner
+        }
+        to {
+          id
+          profilePictureKey
+          name
+          age
+          xp
+          username
+          isActive
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getFollowRelationship = /* GraphQL */ `
+  query GetFollowRelationship($id: ID!) {
+    getFollowRelationship(id: $id) {
+      id
+      byID
+      whoID
+      requestedOn
+      createdAt
+      updatedAt
+      by {
+        id
+        profilePictureKey
+        name
+        age
+        xp
+        username
+        isActive
+        createdAt
+        updatedAt
+        owner
+        experiences {
+          nextToken
+        }
+        requests {
+          nextToken
+        }
+        sentRequests {
+          nextToken
+        }
+        follows {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+      }
+      who {
+        id
+        profilePictureKey
+        name
+        age
+        xp
+        username
+        isActive
+        createdAt
+        updatedAt
+        owner
+        experiences {
+          nextToken
+        }
+        requests {
+          nextToken
+        }
+        sentRequests {
+          nextToken
+        }
+        follows {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const listFollowRelationships = /* GraphQL */ `
+  query ListFollowRelationships(
+    $filter: ModelFollowRelationshipFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listFollowRelationships(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        byID
+        whoID
+        requestedOn
+        createdAt
+        updatedAt
+        by {
+          id
+          profilePictureKey
+          name
+          age
+          xp
+          username
+          isActive
+          createdAt
+          updatedAt
+          owner
+        }
+        who {
+          id
+          profilePictureKey
+          name
+          age
+          xp
+          username
+          isActive
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
       }
       nextToken
     }

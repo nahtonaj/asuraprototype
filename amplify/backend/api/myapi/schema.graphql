@@ -1,17 +1,76 @@
-type Todo @model @auth(rules: [{allow: private}]) {
-  id: ID!
-  name: String!
-  description: String
-}
-
-type SlangProfile @model @auth(rules: [{allow: private}]) {
+type User @model @auth(rules: [
+	{allow: owner}
+	{allow: private, operations: [read]}
+	]) 
+	@key(name: "byName", fields: ["name", "id"])
+	@key(name: "byUsername", fields: ["username", "id"])
+{
 	id: ID!
 	profilePictureKey: String
-	picture1Key: String
-	picture2Key: String
-	picture3Key: String
 	name: String!
 	age: Int!
+	xp: Int!
+	username: String!
 	isActive: Boolean!
-	matches: [ID!]!
-} 
+	experiences: [Experience] @connection(name: "UserExperiencesConnection", keyName: "byOwner", fields: ["id"])
+	requests: [FollowRequest] @connection(name: "UserFollowRequestConnection", keyName: "byTo", fields: ["id"])
+	sentRequests: [FollowRequest] @connection(name: "UserSentRequestConnection", keyName: "byFrom", fields: ["id"])
+	follows: [FollowRelationship] @connection(name: "UserFollowByConnection", keyName: "byBy", fields: ["id"])
+	followers: [FollowRelationship] @connection(name: "UserFollowWhoConnection", keyName: "byWho", fields: ["id"])
+}
+
+type Location 
+{
+	lat: Float
+	lon: Float
+}
+
+type Experience 
+	@model 
+	@auth(rules: [
+		{allow: owner}
+		{allow: private, operations: [read]}
+	])
+	@key(name: "byOwner", fields: ["ownerID"]) 
+{
+	id: ID!
+	ownerID: ID!
+	owner: User @connection(name: "UserExperiencesConnection", fields: ["ownerID"])
+	name: String
+	location: Location
+	pictureKey: String
+	story: String
+	tags: [String]!
+}
+
+type FollowRequest 
+	@model
+	@auth(rules: [
+		{allow: owner}
+		{allow: private, operations: [read]}
+	])
+	@key(name: "byFrom", fields: ["fromID", "toID"])
+	@key(name: "byTo", fields: ["toID", "fromID"])
+{
+	fromID: ID!
+	from: User @connection(name: "UserSentRequestConnection", fields: ["fromID"])
+	toID: ID!
+	to: User @connection(name: "UserFollowRequestConnection", fields: ["toID"])
+	requestedOn: AWSDateTime!
+}
+
+type FollowRelationship
+	@model
+	@auth(rules: [
+		{allow: owner}
+		{allow: private, operations: [read]}
+	])
+	@key(name: "byBy", fields: ["byID", "whoID"])
+	@key(name: "byWho", fields: ["whoID", "byID"])
+{
+	byID: ID!
+	by: User @connection(name: "UserFollowByConnection", fields: ["byID"])
+	whoID: ID!
+	who: User @connection(name: "UserFollowWhoConnection", fields: ["whoID"])
+	requestedOn: AWSDateTime!
+}

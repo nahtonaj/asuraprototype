@@ -1,87 +1,771 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateTodo = /* GraphQL */ `
-  subscription OnCreateTodo {
-    onCreateTodo {
-      id
-      name
-      description
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateTodo = /* GraphQL */ `
-  subscription OnUpdateTodo {
-    onUpdateTodo {
-      id
-      name
-      description
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteTodo = /* GraphQL */ `
-  subscription OnDeleteTodo {
-    onDeleteTodo {
-      id
-      name
-      description
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateSlangProfile = /* GraphQL */ `
-  subscription OnCreateSlangProfile {
-    onCreateSlangProfile {
+export const onCreateUser = /* GraphQL */ `
+  subscription OnCreateUser {
+    onCreateUser {
       id
       profilePictureKey
-      picture1Key
-      picture2Key
-      picture3Key
       name
       age
+      xp
+      username
       isActive
-      matches
       createdAt
       updatedAt
+      owner
+      experiences {
+        items {
+          id
+          ownerID
+          name
+          pictureKey
+          story
+          tags
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      requests {
+        items {
+          id
+          fromID
+          toID
+          requestedOn
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      sentRequests {
+        items {
+          id
+          fromID
+          toID
+          requestedOn
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      follows {
+        items {
+          id
+          byID
+          whoID
+          requestedOn
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      followers {
+        items {
+          id
+          byID
+          whoID
+          requestedOn
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
-export const onUpdateSlangProfile = /* GraphQL */ `
-  subscription OnUpdateSlangProfile {
-    onUpdateSlangProfile {
+export const onUpdateUser = /* GraphQL */ `
+  subscription OnUpdateUser {
+    onUpdateUser {
       id
       profilePictureKey
-      picture1Key
-      picture2Key
-      picture3Key
       name
       age
+      xp
+      username
       isActive
-      matches
       createdAt
       updatedAt
+      owner
+      experiences {
+        items {
+          id
+          ownerID
+          name
+          pictureKey
+          story
+          tags
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      requests {
+        items {
+          id
+          fromID
+          toID
+          requestedOn
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      sentRequests {
+        items {
+          id
+          fromID
+          toID
+          requestedOn
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      follows {
+        items {
+          id
+          byID
+          whoID
+          requestedOn
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      followers {
+        items {
+          id
+          byID
+          whoID
+          requestedOn
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
     }
   }
 `;
-export const onDeleteSlangProfile = /* GraphQL */ `
-  subscription OnDeleteSlangProfile {
-    onDeleteSlangProfile {
+export const onDeleteUser = /* GraphQL */ `
+  subscription OnDeleteUser {
+    onDeleteUser {
       id
       profilePictureKey
-      picture1Key
-      picture2Key
-      picture3Key
       name
       age
+      xp
+      username
       isActive
-      matches
       createdAt
       updatedAt
+      owner
+      experiences {
+        items {
+          id
+          ownerID
+          name
+          pictureKey
+          story
+          tags
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      requests {
+        items {
+          id
+          fromID
+          toID
+          requestedOn
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      sentRequests {
+        items {
+          id
+          fromID
+          toID
+          requestedOn
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      follows {
+        items {
+          id
+          byID
+          whoID
+          requestedOn
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+      followers {
+        items {
+          id
+          byID
+          whoID
+          requestedOn
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreateExperience = /* GraphQL */ `
+  subscription OnCreateExperience {
+    onCreateExperience {
+      id
+      ownerID
+      name
+      location {
+        lat
+        lon
+      }
+      pictureKey
+      story
+      tags
+      createdAt
+      updatedAt
+      owner {
+        id
+        profilePictureKey
+        name
+        age
+        xp
+        username
+        isActive
+        createdAt
+        updatedAt
+        owner
+        experiences {
+          nextToken
+        }
+        requests {
+          nextToken
+        }
+        sentRequests {
+          nextToken
+        }
+        follows {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const onUpdateExperience = /* GraphQL */ `
+  subscription OnUpdateExperience {
+    onUpdateExperience {
+      id
+      ownerID
+      name
+      location {
+        lat
+        lon
+      }
+      pictureKey
+      story
+      tags
+      createdAt
+      updatedAt
+      owner {
+        id
+        profilePictureKey
+        name
+        age
+        xp
+        username
+        isActive
+        createdAt
+        updatedAt
+        owner
+        experiences {
+          nextToken
+        }
+        requests {
+          nextToken
+        }
+        sentRequests {
+          nextToken
+        }
+        follows {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const onDeleteExperience = /* GraphQL */ `
+  subscription OnDeleteExperience {
+    onDeleteExperience {
+      id
+      ownerID
+      name
+      location {
+        lat
+        lon
+      }
+      pictureKey
+      story
+      tags
+      createdAt
+      updatedAt
+      owner {
+        id
+        profilePictureKey
+        name
+        age
+        xp
+        username
+        isActive
+        createdAt
+        updatedAt
+        owner
+        experiences {
+          nextToken
+        }
+        requests {
+          nextToken
+        }
+        sentRequests {
+          nextToken
+        }
+        follows {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const onCreateFollowRequest = /* GraphQL */ `
+  subscription OnCreateFollowRequest {
+    onCreateFollowRequest {
+      id
+      fromID
+      toID
+      requestedOn
+      createdAt
+      updatedAt
+      from {
+        id
+        profilePictureKey
+        name
+        age
+        xp
+        username
+        isActive
+        createdAt
+        updatedAt
+        owner
+        experiences {
+          nextToken
+        }
+        requests {
+          nextToken
+        }
+        sentRequests {
+          nextToken
+        }
+        follows {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+      }
+      to {
+        id
+        profilePictureKey
+        name
+        age
+        xp
+        username
+        isActive
+        createdAt
+        updatedAt
+        owner
+        experiences {
+          nextToken
+        }
+        requests {
+          nextToken
+        }
+        sentRequests {
+          nextToken
+        }
+        follows {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onUpdateFollowRequest = /* GraphQL */ `
+  subscription OnUpdateFollowRequest {
+    onUpdateFollowRequest {
+      id
+      fromID
+      toID
+      requestedOn
+      createdAt
+      updatedAt
+      from {
+        id
+        profilePictureKey
+        name
+        age
+        xp
+        username
+        isActive
+        createdAt
+        updatedAt
+        owner
+        experiences {
+          nextToken
+        }
+        requests {
+          nextToken
+        }
+        sentRequests {
+          nextToken
+        }
+        follows {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+      }
+      to {
+        id
+        profilePictureKey
+        name
+        age
+        xp
+        username
+        isActive
+        createdAt
+        updatedAt
+        owner
+        experiences {
+          nextToken
+        }
+        requests {
+          nextToken
+        }
+        sentRequests {
+          nextToken
+        }
+        follows {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onDeleteFollowRequest = /* GraphQL */ `
+  subscription OnDeleteFollowRequest {
+    onDeleteFollowRequest {
+      id
+      fromID
+      toID
+      requestedOn
+      createdAt
+      updatedAt
+      from {
+        id
+        profilePictureKey
+        name
+        age
+        xp
+        username
+        isActive
+        createdAt
+        updatedAt
+        owner
+        experiences {
+          nextToken
+        }
+        requests {
+          nextToken
+        }
+        sentRequests {
+          nextToken
+        }
+        follows {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+      }
+      to {
+        id
+        profilePictureKey
+        name
+        age
+        xp
+        username
+        isActive
+        createdAt
+        updatedAt
+        owner
+        experiences {
+          nextToken
+        }
+        requests {
+          nextToken
+        }
+        sentRequests {
+          nextToken
+        }
+        follows {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onCreateFollowRelationship = /* GraphQL */ `
+  subscription OnCreateFollowRelationship {
+    onCreateFollowRelationship {
+      id
+      byID
+      whoID
+      requestedOn
+      createdAt
+      updatedAt
+      by {
+        id
+        profilePictureKey
+        name
+        age
+        xp
+        username
+        isActive
+        createdAt
+        updatedAt
+        owner
+        experiences {
+          nextToken
+        }
+        requests {
+          nextToken
+        }
+        sentRequests {
+          nextToken
+        }
+        follows {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+      }
+      who {
+        id
+        profilePictureKey
+        name
+        age
+        xp
+        username
+        isActive
+        createdAt
+        updatedAt
+        owner
+        experiences {
+          nextToken
+        }
+        requests {
+          nextToken
+        }
+        sentRequests {
+          nextToken
+        }
+        follows {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onUpdateFollowRelationship = /* GraphQL */ `
+  subscription OnUpdateFollowRelationship {
+    onUpdateFollowRelationship {
+      id
+      byID
+      whoID
+      requestedOn
+      createdAt
+      updatedAt
+      by {
+        id
+        profilePictureKey
+        name
+        age
+        xp
+        username
+        isActive
+        createdAt
+        updatedAt
+        owner
+        experiences {
+          nextToken
+        }
+        requests {
+          nextToken
+        }
+        sentRequests {
+          nextToken
+        }
+        follows {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+      }
+      who {
+        id
+        profilePictureKey
+        name
+        age
+        xp
+        username
+        isActive
+        createdAt
+        updatedAt
+        owner
+        experiences {
+          nextToken
+        }
+        requests {
+          nextToken
+        }
+        sentRequests {
+          nextToken
+        }
+        follows {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+      }
+      owner
+    }
+  }
+`;
+export const onDeleteFollowRelationship = /* GraphQL */ `
+  subscription OnDeleteFollowRelationship {
+    onDeleteFollowRelationship {
+      id
+      byID
+      whoID
+      requestedOn
+      createdAt
+      updatedAt
+      by {
+        id
+        profilePictureKey
+        name
+        age
+        xp
+        username
+        isActive
+        createdAt
+        updatedAt
+        owner
+        experiences {
+          nextToken
+        }
+        requests {
+          nextToken
+        }
+        sentRequests {
+          nextToken
+        }
+        follows {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+      }
+      who {
+        id
+        profilePictureKey
+        name
+        age
+        xp
+        username
+        isActive
+        createdAt
+        updatedAt
+        owner
+        experiences {
+          nextToken
+        }
+        requests {
+          nextToken
+        }
+        sentRequests {
+          nextToken
+        }
+        follows {
+          nextToken
+        }
+        followers {
+          nextToken
+        }
+      }
+      owner
     }
   }
 `;

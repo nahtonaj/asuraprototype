@@ -9,13 +9,14 @@ import { createTodo, deleteTodo } from '../src/graphql/mutations';
 import { listTodos } from '../src/graphql/queries';
 import { useContext } from 'react';
 import { userContext } from './userContext';
+import styles from './styles'
 
 const initialState = { name: '', description: '' }
 
 
 const Home = () => {
   console.log("loading app...")
-  const user = useContext(userContext);
+  const { user } = useContext(userContext);
   console.log("User: ", user);
   const [formState, setFormState] = useState(initialState);
   const [todos, setTodos] = useState([]);
@@ -71,16 +72,11 @@ const Home = () => {
   }
 
   return (
-    <View style= {{
-      flex: 1,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-    }}>
+    <View style= {styles.container}>
       {/* <NavBar title="Slang" style={{ backgroundColor: theme.COLORS.NEUTRAL }}/> */}
       <Block center fluid>
         <Block>
-          <Text >Welcome {user.attributes ? user.attributes.email : "null"}!</Text>
+          <Text >Welcome {user.profile.name}!</Text>
         </Block>
         <Input
           onChangeText={val => setInput('name', val)}

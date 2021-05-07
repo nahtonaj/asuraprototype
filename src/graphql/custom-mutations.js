@@ -11,73 +11,9 @@ export const createUser = /* GraphQL */ `
       profilePictureKey
       name
       age
-      xp
-      username
       isActive
       createdAt
       updatedAt
-      owner
-      experiences {
-        items {
-          id
-          ownerID
-          name
-          pictureKey
-          story
-          tags
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      requests {
-        items {
-          id
-          fromID
-          toID
-          requestedOn
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      sentRequests {
-        items {
-          id
-          fromID
-          toID
-          requestedOn
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      follows {
-        items {
-          id
-          byID
-          whoID
-          requestedOn
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      followers {
-        items {
-          id
-          byID
-          whoID
-          requestedOn
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -91,73 +27,9 @@ export const updateUser = /* GraphQL */ `
       profilePictureKey
       name
       age
-      xp
-      username
       isActive
       createdAt
       updatedAt
-      owner
-      experiences {
-        items {
-          id
-          ownerID
-          name
-          pictureKey
-          story
-          tags
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      requests {
-        items {
-          id
-          fromID
-          toID
-          requestedOn
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      sentRequests {
-        items {
-          id
-          fromID
-          toID
-          requestedOn
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      follows {
-        items {
-          id
-          byID
-          whoID
-          requestedOn
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      followers {
-        items {
-          id
-          byID
-          whoID
-          requestedOn
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
     }
   }
 `;
@@ -171,8 +43,6 @@ export const deleteUser = /* GraphQL */ `
       profilePictureKey
       name
       age
-      xp
-      username
       isActive
       createdAt
       updatedAt
@@ -264,8 +134,6 @@ export const createExperience = /* GraphQL */ `
         profilePictureKey
         name
         age
-        xp
-        username
         isActive
         createdAt
         updatedAt
@@ -312,8 +180,6 @@ export const updateExperience = /* GraphQL */ `
         profilePictureKey
         name
         age
-        xp
-        username
         isActive
         createdAt
         updatedAt
@@ -360,8 +226,6 @@ export const deleteExperience = /* GraphQL */ `
         profilePictureKey
         name
         age
-        xp
-        username
         isActive
         createdAt
         updatedAt
@@ -402,8 +266,6 @@ export const createFollowRequest = /* GraphQL */ `
         profilePictureKey
         name
         age
-        xp
-        username
         isActive
         createdAt
         updatedAt
@@ -429,8 +291,6 @@ export const createFollowRequest = /* GraphQL */ `
         profilePictureKey
         name
         age
-        xp
-        username
         isActive
         createdAt
         updatedAt
@@ -472,8 +332,6 @@ export const updateFollowRequest = /* GraphQL */ `
         profilePictureKey
         name
         age
-        xp
-        username
         isActive
         createdAt
         updatedAt
@@ -499,8 +357,6 @@ export const updateFollowRequest = /* GraphQL */ `
         profilePictureKey
         name
         age
-        xp
-        username
         isActive
         createdAt
         updatedAt
@@ -542,8 +398,6 @@ export const deleteFollowRequest = /* GraphQL */ `
         profilePictureKey
         name
         age
-        xp
-        username
         isActive
         createdAt
         updatedAt
@@ -569,8 +423,6 @@ export const deleteFollowRequest = /* GraphQL */ `
         profilePictureKey
         name
         age
-        xp
-        username
         isActive
         createdAt
         updatedAt
@@ -612,8 +464,6 @@ export const createFollowRelationship = /* GraphQL */ `
         profilePictureKey
         name
         age
-        xp
-        username
         isActive
         createdAt
         updatedAt
@@ -639,8 +489,6 @@ export const createFollowRelationship = /* GraphQL */ `
         profilePictureKey
         name
         age
-        xp
-        username
         isActive
         createdAt
         updatedAt
@@ -682,8 +530,6 @@ export const updateFollowRelationship = /* GraphQL */ `
         profilePictureKey
         name
         age
-        xp
-        username
         isActive
         createdAt
         updatedAt
@@ -709,8 +555,6 @@ export const updateFollowRelationship = /* GraphQL */ `
         profilePictureKey
         name
         age
-        xp
-        username
         isActive
         createdAt
         updatedAt
@@ -752,8 +596,6 @@ export const deleteFollowRelationship = /* GraphQL */ `
         profilePictureKey
         name
         age
-        xp
-        username
         isActive
         createdAt
         updatedAt
@@ -779,8 +621,6 @@ export const deleteFollowRelationship = /* GraphQL */ `
         profilePictureKey
         name
         age
-        xp
-        username
         isActive
         createdAt
         updatedAt

@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "api": {
+      "myapi": [
+        "Query",
+        "Mutation",
+        "Subscription"
+      ]
+    },
+    "auth": {
+      "rnamplify796900f8": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    "storage": {
+      "s32557e09d": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "SlangProfile:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

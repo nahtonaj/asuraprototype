@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "rnamplify796900f8": {}
+      },
+      "function": {
+        "fetchMatches": {
+          "deploymentBucketName": "amplify-rnamplify-demo-234312-deployment",
+          "s3Key": "amplify-builds/fetchMatches-4553672f694744775678-build.zip"
+        }
       }
     }
   }
