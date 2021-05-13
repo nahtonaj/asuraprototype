@@ -12,6 +12,7 @@ export const listUsers = /* GraphQL */ `
         id
         profilePictureKey
         name
+        namelowercase
         age
         xp
         username
@@ -45,6 +46,7 @@ export const getUser = /* GraphQL */ `
       id
       profilePictureKey
       name
+      namelowercase
       age
       xp
       username
@@ -70,6 +72,7 @@ export const getUser = /* GraphQL */ `
           id
           fromID
           toID
+          owners
           requestedOn
           createdAt
           updatedAt
@@ -82,6 +85,7 @@ export const getUser = /* GraphQL */ `
           id
           fromID
           toID
+          owners
           requestedOn
           createdAt
           updatedAt
@@ -94,6 +98,7 @@ export const getUser = /* GraphQL */ `
           id
           byID
           whoID
+          owners
           requestedOn
           createdAt
           updatedAt
@@ -106,6 +111,7 @@ export const getUser = /* GraphQL */ `
           id
           byID
           whoID
+          owners
           requestedOn
           createdAt
           updatedAt
@@ -135,6 +141,7 @@ export const getExperience = /* GraphQL */ `
         id
         profilePictureKey
         name
+        namelowercase
         age
         xp
         username
@@ -185,6 +192,7 @@ export const listExperiences = /* GraphQL */ `
           id
           profilePictureKey
           name
+          namelowercase
           age
           xp
           username
@@ -204,6 +212,7 @@ export const getFollowRequest = /* GraphQL */ `
       id
       fromID
       toID
+      owners
       requestedOn
       createdAt
       updatedAt
@@ -211,6 +220,7 @@ export const getFollowRequest = /* GraphQL */ `
         id
         profilePictureKey
         name
+        namelowercase
         age
         xp
         username
@@ -238,6 +248,7 @@ export const getFollowRequest = /* GraphQL */ `
         id
         profilePictureKey
         name
+        namelowercase
         age
         xp
         username
@@ -276,6 +287,7 @@ export const listFollowRequests = /* GraphQL */ `
         id
         fromID
         toID
+        owners
         requestedOn
         createdAt
         updatedAt
@@ -283,6 +295,7 @@ export const listFollowRequests = /* GraphQL */ `
           id
           profilePictureKey
           name
+          namelowercase
           age
           xp
           username
@@ -295,6 +308,7 @@ export const listFollowRequests = /* GraphQL */ `
           id
           profilePictureKey
           name
+          namelowercase
           age
           xp
           username
@@ -315,6 +329,7 @@ export const getFollowRelationship = /* GraphQL */ `
       id
       byID
       whoID
+      owners
       requestedOn
       createdAt
       updatedAt
@@ -322,6 +337,7 @@ export const getFollowRelationship = /* GraphQL */ `
         id
         profilePictureKey
         name
+        namelowercase
         age
         xp
         username
@@ -349,6 +365,7 @@ export const getFollowRelationship = /* GraphQL */ `
         id
         profilePictureKey
         name
+        namelowercase
         age
         xp
         username
@@ -391,6 +408,7 @@ export const listFollowRelationships = /* GraphQL */ `
         id
         byID
         whoID
+        owners
         requestedOn
         createdAt
         updatedAt
@@ -398,6 +416,7 @@ export const listFollowRelationships = /* GraphQL */ `
           id
           profilePictureKey
           name
+          namelowercase
           age
           xp
           username
@@ -410,6 +429,7 @@ export const listFollowRelationships = /* GraphQL */ `
           id
           profilePictureKey
           name
+          namelowercase
           age
           xp
           username

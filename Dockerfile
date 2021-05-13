@@ -19,4 +19,4 @@ COPY . ./
 EXPOSE 3000 19000 19001 19002 19003 19004 19005 19006
 
 # start app
-CMD ["yarn", "web", "--lan"]
+CMD ["yarn", "start", "--lan"]

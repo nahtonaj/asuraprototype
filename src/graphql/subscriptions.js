@@ -7,6 +7,7 @@ export const onCreateUser = /* GraphQL */ `
       id
       profilePictureKey
       name
+      namelowercase
       age
       xp
       username
@@ -32,6 +33,7 @@ export const onCreateUser = /* GraphQL */ `
           id
           fromID
           toID
+          owners
           requestedOn
           createdAt
           updatedAt
@@ -44,6 +46,7 @@ export const onCreateUser = /* GraphQL */ `
           id
           fromID
           toID
+          owners
           requestedOn
           createdAt
           updatedAt
@@ -56,6 +59,7 @@ export const onCreateUser = /* GraphQL */ `
           id
           byID
           whoID
+          owners
           requestedOn
           createdAt
           updatedAt
@@ -68,6 +72,7 @@ export const onCreateUser = /* GraphQL */ `
           id
           byID
           whoID
+          owners
           requestedOn
           createdAt
           updatedAt
@@ -84,6 +89,7 @@ export const onUpdateUser = /* GraphQL */ `
       id
       profilePictureKey
       name
+      namelowercase
       age
       xp
       username
@@ -109,6 +115,7 @@ export const onUpdateUser = /* GraphQL */ `
           id
           fromID
           toID
+          owners
           requestedOn
           createdAt
           updatedAt
@@ -121,6 +128,7 @@ export const onUpdateUser = /* GraphQL */ `
           id
           fromID
           toID
+          owners
           requestedOn
           createdAt
           updatedAt
@@ -133,6 +141,7 @@ export const onUpdateUser = /* GraphQL */ `
           id
           byID
           whoID
+          owners
           requestedOn
           createdAt
           updatedAt
@@ -145,6 +154,7 @@ export const onUpdateUser = /* GraphQL */ `
           id
           byID
           whoID
+          owners
           requestedOn
           createdAt
           updatedAt
@@ -161,6 +171,7 @@ export const onDeleteUser = /* GraphQL */ `
       id
       profilePictureKey
       name
+      namelowercase
       age
       xp
       username
@@ -186,6 +197,7 @@ export const onDeleteUser = /* GraphQL */ `
           id
           fromID
           toID
+          owners
           requestedOn
           createdAt
           updatedAt
@@ -198,6 +210,7 @@ export const onDeleteUser = /* GraphQL */ `
           id
           fromID
           toID
+          owners
           requestedOn
           createdAt
           updatedAt
@@ -210,6 +223,7 @@ export const onDeleteUser = /* GraphQL */ `
           id
           byID
           whoID
+          owners
           requestedOn
           createdAt
           updatedAt
@@ -222,6 +236,7 @@ export const onDeleteUser = /* GraphQL */ `
           id
           byID
           whoID
+          owners
           requestedOn
           createdAt
           updatedAt
@@ -251,6 +266,7 @@ export const onCreateExperience = /* GraphQL */ `
         id
         profilePictureKey
         name
+        namelowercase
         age
         xp
         username
@@ -296,6 +312,7 @@ export const onUpdateExperience = /* GraphQL */ `
         id
         profilePictureKey
         name
+        namelowercase
         age
         xp
         username
@@ -341,6 +358,7 @@ export const onDeleteExperience = /* GraphQL */ `
         id
         profilePictureKey
         name
+        namelowercase
         age
         xp
         username
@@ -373,6 +391,7 @@ export const onCreateFollowRequest = /* GraphQL */ `
       id
       fromID
       toID
+      owners
       requestedOn
       createdAt
       updatedAt
@@ -380,6 +399,7 @@ export const onCreateFollowRequest = /* GraphQL */ `
         id
         profilePictureKey
         name
+        namelowercase
         age
         xp
         username
@@ -407,6 +427,7 @@ export const onCreateFollowRequest = /* GraphQL */ `
         id
         profilePictureKey
         name
+        namelowercase
         age
         xp
         username
@@ -440,6 +461,7 @@ export const onUpdateFollowRequest = /* GraphQL */ `
       id
       fromID
       toID
+      owners
       requestedOn
       createdAt
       updatedAt
@@ -447,6 +469,7 @@ export const onUpdateFollowRequest = /* GraphQL */ `
         id
         profilePictureKey
         name
+        namelowercase
         age
         xp
         username
@@ -474,6 +497,7 @@ export const onUpdateFollowRequest = /* GraphQL */ `
         id
         profilePictureKey
         name
+        namelowercase
         age
         xp
         username
@@ -507,6 +531,7 @@ export const onDeleteFollowRequest = /* GraphQL */ `
       id
       fromID
       toID
+      owners
       requestedOn
       createdAt
       updatedAt
@@ -514,6 +539,7 @@ export const onDeleteFollowRequest = /* GraphQL */ `
         id
         profilePictureKey
         name
+        namelowercase
         age
         xp
         username
@@ -541,6 +567,7 @@ export const onDeleteFollowRequest = /* GraphQL */ `
         id
         profilePictureKey
         name
+        namelowercase
         age
         xp
         username
@@ -574,6 +601,7 @@ export const onCreateFollowRelationship = /* GraphQL */ `
       id
       byID
       whoID
+      owners
       requestedOn
       createdAt
       updatedAt
@@ -581,6 +609,7 @@ export const onCreateFollowRelationship = /* GraphQL */ `
         id
         profilePictureKey
         name
+        namelowercase
         age
         xp
         username
@@ -608,6 +637,7 @@ export const onCreateFollowRelationship = /* GraphQL */ `
         id
         profilePictureKey
         name
+        namelowercase
         age
         xp
         username
@@ -641,6 +671,7 @@ export const onUpdateFollowRelationship = /* GraphQL */ `
       id
       byID
       whoID
+      owners
       requestedOn
       createdAt
       updatedAt
@@ -648,6 +679,7 @@ export const onUpdateFollowRelationship = /* GraphQL */ `
         id
         profilePictureKey
         name
+        namelowercase
         age
         xp
         username
@@ -675,6 +707,7 @@ export const onUpdateFollowRelationship = /* GraphQL */ `
         id
         profilePictureKey
         name
+        namelowercase
         age
         xp
         username
@@ -708,6 +741,7 @@ export const onDeleteFollowRelationship = /* GraphQL */ `
       id
       byID
       whoID
+      owners
       requestedOn
       createdAt
       updatedAt
@@ -715,6 +749,7 @@ export const onDeleteFollowRelationship = /* GraphQL */ `
         id
         profilePictureKey
         name
+        namelowercase
         age
         xp
         username
@@ -742,6 +777,7 @@ export const onDeleteFollowRelationship = /* GraphQL */ `
         id
         profilePictureKey
         name
+        namelowercase
         age
         xp
         username

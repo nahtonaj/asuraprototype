@@ -8,15 +8,16 @@ type User @model @auth(rules: [
 	id: ID!
 	profilePictureKey: String
 	name: String!
+	namelowercase: String!
 	age: Int!
 	xp: Int!
 	username: String!
 	isActive: Boolean!
-	experiences: [Experience] @connection(name: "UserExperiencesConnection", keyName: "byOwner", fields: ["id"])
-	requests: [FollowRequest] @connection(name: "UserFollowRequestConnection", keyName: "byTo", fields: ["id"])
-	sentRequests: [FollowRequest] @connection(name: "UserSentRequestConnection", keyName: "byFrom", fields: ["id"])
-	follows: [FollowRelationship] @connection(name: "UserFollowByConnection", keyName: "byBy", fields: ["id"])
-	followers: [FollowRelationship] @connection(name: "UserFollowWhoConnection", keyName: "byWho", fields: ["id"])
+	experiences: [Experience] @connection(name: "UserExperiencesConnection", keyName: "byOwner", fields: ["id"], sortField: "createdAt")
+	requests: [FollowRequest] @connection(name: "UserFollowRequestConnection", keyName: "byTo", fields: ["id"], sortField: "createdAt")
+	sentRequests: [FollowRequest] @connection(name: "UserSentRequestConnection", keyName: "byFrom", fields: ["id"], sortField: "createdAt")
+	follows: [FollowRelationship] @connection(name: "UserFollowByConnection", keyName: "byBy", fields: ["id"], sortField: "createdAt")
+	followers: [FollowRelationship] @connection(name: "UserFollowWhoConnection", keyName: "byWho", fields: ["id"], sortField: "createdAt")
 }
 
 type Location 
@@ -31,7 +32,7 @@ type Experience
 		{allow: owner}
 		{allow: private, operations: [read]}
 	])
-	@key(name: "byOwner", fields: ["ownerID"]) 
+	@key(name: "byOwner", fields: ["ownerID"])
 {
 	id: ID!
 	ownerID: ID!
@@ -47,6 +48,7 @@ type FollowRequest
 	@model
 	@auth(rules: [
 		{allow: owner}
+		{allow: owner, ownerField: "owners", operations: [read, delete]}
 		{allow: private, operations: [read]}
 	])
 	@key(name: "byFrom", fields: ["fromID", "toID"])
@@ -56,6 +58,7 @@ type FollowRequest
 	from: User @connection(name: "UserSentRequestConnection", fields: ["fromID"])
 	toID: ID!
 	to: User @connection(name: "UserFollowRequestConnection", fields: ["toID"])
+	owners: [ID!]
 	requestedOn: AWSDateTime!
 }
 
@@ -63,6 +66,7 @@ type FollowRelationship
 	@model
 	@auth(rules: [
 		{allow: owner}
+		{allow: owner, ownerField: "owners", operations: [read, delete]}
 		{allow: private, operations: [read]}
 	])
 	@key(name: "byBy", fields: ["byID", "whoID"])
@@ -72,5 +76,6 @@ type FollowRelationship
 	by: User @connection(name: "UserFollowByConnection", fields: ["byID"])
 	whoID: ID!
 	who: User @connection(name: "UserFollowWhoConnection", fields: ["whoID"])
+	owners: [ID!]
 	requestedOn: AWSDateTime!
 }

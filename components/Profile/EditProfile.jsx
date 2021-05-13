@@ -10,11 +10,11 @@ import * as ImagePicker from 'expo-image-picker';
 
 import { Text, Input, Button, Block, Card } from 'galio-framework';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
-import { updateUser, createUser } from '../src/graphql/custom-mutations';
-import { getUserProfile } from '../src/graphql/custom-queries';
+import { updateUser, createUser } from '../../src/graphql/custom-mutations';
+import { getUserProfile } from '../../src/graphql/custom-queries';
 import { useContext } from 'react';
-import { userContext } from './userContext';
-import styles from './styles';
+import { userContext } from '../userContext';
+import styles, { placeholderImage } from '../styles';
 
 
 
@@ -26,6 +26,7 @@ const EditProfile = () => {
     id: user.attributes.sub,
     isActive: true,
     name: "",
+    namelowercase: "",
     xp: 0,
     username: user.username,
     profilePictureKey: "",
@@ -39,7 +40,7 @@ const EditProfile = () => {
   }, []);
 
   const [formState, setFormState] = useState(user.profile ? user.profile : blankProfile);
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState(placeholderImage);
   const [isNewImage, setIsNewImage] = useState(false);
   const [existingUser, setExistingUser] = useState(user.profile ? true : false);
   
@@ -90,9 +91,17 @@ const EditProfile = () => {
     })
   }
 
-  async function updateProfile() {
+  function getProfileFromForm() {
+    return {
+      ...formState,
+      namelowercase: formState.name.toLocaleLowerCase(),
+    }
+  }
+
+  async function updateProfile(addedFields) {
     try {
-      const profile = { ...formState }
+      const profile = {...getProfileFromForm(), ...addedFields};
+      console.log(profile);
       delete profile.createdAt;
       delete profile.updatedAt;
       const profileData = await API.graphql(graphqlOperation(updateUser, { input: profile }))
@@ -103,11 +112,12 @@ const EditProfile = () => {
     }
   }
 
-  async function createProfile() {
+  async function createProfile(addedFields) {
     try {
-      const profile = { ...formState };
+      const profile = {...getProfileFromForm(), ...addedFields};
       const profileData = await API.graphql(graphqlOperation(createUser, { input: profile }))
       console.log("Created profile: ", profileData);
+      setExistingUser(true);
       return profileData.data.createUser;
     } catch(err) {
       console.log("Error creating profile: ", err);
@@ -122,16 +132,15 @@ const EditProfile = () => {
         .then(blob => {
           Storage.put(user.attributes.sub + "-Profile", blob, access)
           .then((succ) => {
-              console.log("Successfully uploaded image: ", succ);
-              setInput("profilePictureKey", succ.key);
-              setIsNewImage(false);
-          })
-          .then(() => {
+            console.log("Successfully uploaded image: ", succ);
+            setInput("profilePictureKey", succ.key);
+            const addedFields = {profilePictureKey: succ.key};
+            setIsNewImage(false);
             fetchImages();
             if (existingUser) {
-              return updateProfile();
+              return updateProfile(addedFields);
             } else {
-              return createProfile();
+              return createProfile(addedFields);
             }
           })
           .catch(err => {
@@ -146,9 +155,9 @@ const EditProfile = () => {
     }
     else {
       if (existingUser) {
-        updateProfile();
+        return updateProfile();
       } else {
-        createProfile();
+        return createProfile();
       }
     }
   }

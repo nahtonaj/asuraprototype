@@ -10,14 +10,13 @@ import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify';
 import { getUserProfile } from './src/graphql/custom-queries';
 import config from './aws-exports';
 import { withAuthenticator } from 'aws-amplify-react-native';
-import EditProfile from './components/EditProfile';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { userContext } from './components/userContext';
 import { locationContext } from './components/locationContext';
-import FollowFeed from './components/FollowFeed';
-import SearchableList from './components/SearchableList';
-import Search from './components/Search';
+import FeedStack from './components/Feed/FeedStack';
+import SearchStack from './components/Search/SearchStack';
+import ProfileStack from './components/Profile/ProfileStack';
 
 
 Amplify.configure({
@@ -79,18 +78,21 @@ const App = () =>  {
         <userContext.Provider value={{user, setUser}}>
           <locationContext.Provider value={{location, setLocation}}>
             <NavigationContainer>
-              <Tabs.Navigator initialRouteName="Feed"> 
+              <Tabs.Navigator 
+              initialRouteName="Feed"
+              barStyle={styles.tabBarStyle}
+              > 
                 <Tabs.Screen
                 name="Feed"
-                component={FollowFeed}
+                component={FeedStack}
                 />
                 <Tabs.Screen
                 name="Search"
-                component={Search}
+                component={SearchStack}
                 />
                 <Tabs.Screen
                 name="Profile"
-                component={EditProfile}
+                component={ProfileStack}
                 />
               </Tabs.Navigator>
             </NavigationContainer>

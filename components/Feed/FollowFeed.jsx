@@ -1,15 +1,16 @@
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
-import { getUserFollowers } from '../src/graphql/custom-queries';
-import { userContext } from './userContext';
-import styles from './styles';
+import { getUserFollowingExperiences } from '../../src/graphql/custom-queries';
+import { userContext } from '../userContext';
+import styles from '../styles';
 import { View, FlatList, TouchableOpacity, Image } from 'react-native';
 import { Text } from 'galio-framework';
+import { placeholderImage } from '../styles'
 
 
 const FollowContainer = ({ item }) => {
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(placeholderImage);
   async function getImage(uri) {
     if (!uri) {
       return;
@@ -22,12 +23,12 @@ const FollowContainer = ({ item }) => {
       console.log("Error getting image ", err);
     })
   }
-  getImage(item.profilePictureKey);
+  getImage(item.pictureKey);
   return (
     <View style={ styles.item }>
       <TouchableOpacity>
         <Text style={{ fontSize: 20, fontWeight: '500' }}>{ item.name }</Text>
-        <Image source={{ uri: image}} style={styles.friendProfilePicture} resizeMode={'cover'}/>
+        <Image source={{ uri: image }} style={styles.friendProfilePicture} resizeMode={'cover'}/>
         <Text>Click to match!</Text>
       </TouchableOpacity>
     </View>
@@ -35,21 +36,23 @@ const FollowContainer = ({ item }) => {
 }
 
 
-const FollowFeed = () => {
+const FollowFeed = ({ navigation, route }) => {
   const { user } = useContext(userContext);
 
   const [follows, setFollows] = useState([]);
 
   useEffect(() => {
     getFollows();
-    // fetchMatchProfiles();
   }, [])
 
   async function getFollows() {
-    await API.graphql(graphqlOperation(getUserFollowers, { id: user.attributes.sub }))
+    await API.graphql(graphqlOperation(getUserFollowingExperiences, { id: user.attributes.sub }))
     .then((response) => {
-      setFollows(response.data.getUser.items);
-      console.log(response.data.getUser.items);
+      const whos = response.data.getUser.follows.items;
+      const concatwhos = whos.reduce((a, b) => a.who.experiences.items.concat(b.who.experiences.items));
+      const experiences = concatwhos.who.experiences.items.sort((b, a) => a.createdAt.localeCompare(b.createdAt));
+      setFollows(experiences);
+      console.log(experiences);
     })
     .catch((err) => {
       console.log("Error getting follows:", err)
@@ -100,7 +103,7 @@ const FollowFeed = () => {
             <FollowContainer item={ item }/>
           )
         }}
-        keyExtractor={ (item) => item.name } 
+        keyExtractor={ (item, index) => index.toString() } 
         contentContainerStyle={{ backgroundColor: '#F0F1F4', paddingHorizontal: 20, paddingVertical: 10 }}
         scrollEnabled
       />
