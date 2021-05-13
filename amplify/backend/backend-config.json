@@ -34,35 +34,5 @@
       "providerPlugin": "awscloudformation"
     }
   },
-  "function": {
-    "fetchMatches": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "api",
-          "resourceName": "myapi",
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput"
-          ]
-        },
-        {
-          "category": "auth",
-          "resourceName": "rnamplify796900f8",
-          "attributes": [
-            "UserPoolId"
-          ]
-        },
-        {
-          "category": "storage",
-          "resourceName": "s32557e09d",
-          "attributes": [
-            "BucketName"
-          ]
-        }
-      ]
-    }
-  }
+  "function": {}
 }
