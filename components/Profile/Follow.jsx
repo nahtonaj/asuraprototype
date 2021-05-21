@@ -12,7 +12,9 @@ import { placeholderImage } from '../styles';
 const FollowTabs = createMaterialTopTabNavigator();
 
 const Follow = ({ navigation }) => {
-  const [ result, setResult ] = useState(null);
+  const [ requests, setRequests ] = useState([]);
+  const [ sentRequests, setSentRequests ] = useState([]);
+  const [ isLoading, setIsLoading ] = useState(true);
 
   useEffect(() => {
     getResults();
@@ -22,18 +24,19 @@ const Follow = ({ navigation }) => {
 
   async function getResults() {
     try {
-      await API.graphql(graphqlOperation(
+      setIsLoading(true);
+      const profileData = await API.graphql(graphqlOperation(
         getUserFollow, { id: user.profile.id }
-      ))
-      .then(async (profileData) => {
-        const newprofile = profileData.data.getUser
-        if (!newprofile) {
-          console.log("No profile found for ", profile.id);
-        } else {
-          console.log("Got follows result:", newprofile);
-          setResult(newprofile);
-        }
-      })
+      ));
+      const newprofile = profileData.data.getUser
+      if (!newprofile) {
+        console.log("No profile found for ", profile.id);
+      } else {
+        console.log("Got follows result:", newprofile);
+        setRequests(newprofile.requests.items);
+        setSentRequests(newprofile.sentRequests.items);
+        setIsLoading(false);
+      }
     } catch (err) {
       console.log("Error getting profile: ", err);
     }
@@ -54,7 +57,6 @@ const Follow = ({ navigation }) => {
     .then(async (response) => {
       console.log("Accepted follow request, creating follow relationship: ", response.data);
       await declineFollowRequest(followRequestID);
-      getResults();
     })
     .catch((err) => {
       console.log("Error accepting follow request: ", err);
@@ -62,20 +64,20 @@ const Follow = ({ navigation }) => {
   }
 
   async function declineFollowRequest(id) {
-    await API.graphql(graphqlOperation(
-      deleteFollowRequest, {
-        input: {
-          id: id,
+    try {
+      const response = await API.graphql(graphqlOperation(
+        deleteFollowRequest, {
+          input: {
+            id: id,
+          }
         }
-      }
-    ))
-    .then((response) => {
+      ));
       console.log("Deleted follow request", response.data);
-      getResults();
-    })
-    .catch((err) => {
+      // setRequests(requests.filter((item) => item.id !== id));
+      // setSentRequests(sentRequests.filter((item) => item.id !== id));
+    } catch(err) {
       console.log("Error deleting follow request: ", err);
-    })
+    }
   }
 
   const renderSeparator = () => {
@@ -92,9 +94,15 @@ const Follow = ({ navigation }) => {
   };
 
   const FollowList = ({ navigation, route }) => {
+    const [ list, setList ] = route.params.sent ? [ sentRequests, setSentRequests ] : [ requests, setRequests ];
+
+    const deleteItem = (id) => {
+      setList(list.filter((item) => item.id !== id));
+    }
+
     return (
       <FlatList
-        data={route.params.list}
+        data={list}
         renderItem={({ item }) => {
           return (
             <TouchableOpacity onPress={() => {
@@ -103,6 +111,7 @@ const Follow = ({ navigation }) => {
               item={ item.to ? item.to : item.from }
               acceptPossible={item.from ? true : false}
               followRequestID={item.id}
+              deleteItem={deleteItem}
               />
             </TouchableOpacity>
           )
@@ -115,7 +124,7 @@ const Follow = ({ navigation }) => {
     );
   }
 
-  const FollowResultContainer = ({ item, index, followRequestID, acceptPossible }) => {
+  const FollowResultContainer = ({ item, index, followRequestID, acceptPossible, deleteItem }) => {
     const [image, setImage] = useState(placeholderImage);
     async function getImage(uri) {
       if (!uri) {
@@ -145,7 +154,10 @@ const Follow = ({ navigation }) => {
           acceptPossible &&
           <Button title="Accept" onPress={() => {acceptFollowRequest(item, followRequestID)}}/>
         }
-        <Button title="Delete" onPress={() => {declineFollowRequest(followRequestID)}}/>
+        <Button title="Delete" onPress={() => {
+          declineFollowRequest(followRequestID);
+          deleteItem(followRequestID);
+          }}/>
       </ListItem>
     );
   }
@@ -153,17 +165,17 @@ const Follow = ({ navigation }) => {
   return (
     <View style={{ flex: 1 }}>
       {
-      result &&
+      !isLoading &&
       <FollowTabs.Navigator>
           <FollowTabs.Screen name="Requests" 
           component={FollowList}
           initialParams={{
-            list: result.requests.items,
+            sent: false
           }} />
           <FollowTabs.Screen name="Pending" 
           component={FollowList}
           initialParams={{
-            list: result.sentRequests.items,
+            sent: true
           }}/>
       </FollowTabs.Navigator>
       }

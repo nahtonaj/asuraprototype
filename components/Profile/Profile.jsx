@@ -8,7 +8,7 @@ import {
 
 import { Text, Block, Card, Button } from 'galio-framework';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
-import { getUserProfile } from '../../src/graphql/custom-queries';
+import { getUserProfile, getUserFollowingByID } from '../../src/graphql/custom-queries';
 import { useContext } from 'react';
 import { userContext } from '../userContext';
 import styles, { placeholderImage } from '../styles';
@@ -22,6 +22,8 @@ const Profile = ({navigation, route}) => {
   const id = route.params.id;
   const isOwnProfile = route.params.isOwnProfile;
 
+  const [ isFollowing, setIsFollowing ] = useState(false);
+  const [ requested, setRequested ] = useState(false);
   const [ profile, setProfile ] = useState({
     age: null,
     id: id,
@@ -64,11 +66,34 @@ const Profile = ({navigation, route}) => {
         } else {
           console.log("Got profile:", newprofile);
           setProfile(newprofile);
+          await getIsFollowing();
           await fetchImages(newprofile.profilePictureKey);
         }
       })
     } catch (err) {
       console.log("Error getting profile: ", err);
+    }
+  }
+
+  async function getIsFollowing() {
+    try {
+      const results = await API.graphql(graphqlOperation(
+        getUserFollowingByID, { id: user.attributes.sub, followsid: profile.id }
+      ));
+      console.log("Following query returned: ", results.data);
+      const follows = results.data.getUser.follows.items;
+      const req = results.data.getUser.sentRequests.items;
+      if (follows.length === 0) {
+        setIsFollowing(false);
+        if (req.length !== 0) {
+          setRequested(true);
+        }
+      }
+      else {
+        setIsFollowing(true);
+      }
+    } catch (err) {
+      console.log("Error getting following: ", err);
     }
   }
 
@@ -86,6 +111,7 @@ const Profile = ({navigation, route}) => {
     ))
     .then((response) => {
       console.log("Created follow request:", response.data);
+      setIsFollowing(true);
     })
     .catch((err) => {
       console.log("Error creating follow request: ", err);
@@ -107,8 +133,16 @@ const Profile = ({navigation, route}) => {
           />
         }
         {
-          !isOwnProfile &&
+          !isOwnProfile && !isFollowing && !requested &&
           <Button onPress={addFollow}>Follow</Button>
+        }
+        {
+          !isOwnProfile && !isFollowing && requested &&
+          <Button color="info">Requested</Button>
+        }
+        {
+          !isOwnProfile && isFollowing &&
+          <Button color="success">Following</Button>
         }
         {
           isOwnProfile &&

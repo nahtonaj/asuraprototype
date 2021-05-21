@@ -74,6 +74,23 @@ export const getUserFollowing = /* GraphQL */ `
     }
   }
 `;
+export const getUserFollowingByID = /* GraphQL */ `
+  query GetUser($id: ID!, $followsid: ID!) {
+    getUser(id: $id) {
+      id
+      follows(whoID: {eq: $followsid}) {
+        items {
+          id
+        }
+      }
+      sentRequests(toID: {eq: $followsid}) {
+        items {
+          id
+        }
+      }
+    }
+  }
+`;
 export const getUserFollows = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
