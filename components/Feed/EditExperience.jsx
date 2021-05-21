@@ -101,6 +101,7 @@ const EditExperience = ({ navigation, route }) => {
       const experienceData = await API.graphql(graphqlOperation(updateExperience, { input: experience }))
       console.log("Updated experience: ", experienceData);
       setFormState(experienceData.data.updateExperience);
+      navigation.navigate("Feed");
       return experienceData.data.updateExperience;
     } catch(err) {
       console.log("Error updating experience: ", err);
@@ -114,6 +115,7 @@ const EditExperience = ({ navigation, route }) => {
       console.log("Created experience: ", experienceData);
       setExistingExperience(true);
       setFormState(experienceData.data.createExperience);
+      navigation.navigate("Feed");
       return experienceData.data.createExperience;
     } catch(err) {
       console.log("Error creating experience: ", err);
