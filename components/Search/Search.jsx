@@ -12,9 +12,9 @@ const Search = ({ navigation }) => {
 
   const { user } = useContext(userContext);
 
-  async function getResults() {
-    if (query !== "") {
-      await API.graphql(graphqlOperation(listUsersByName, { prefix: query.toLocaleLowerCase() }))
+  async function getResults(text) {
+    if (text !== "") {
+      await API.graphql(graphqlOperation(listUsersByName, { prefix: text.toLocaleLowerCase() }))
       .then(response => {
         if (response.data) {
           console.log("Results: ", response.data);
@@ -99,8 +99,11 @@ const Search = ({ navigation }) => {
             placeholder="Search users..."
             lightTheme
             round
-            onChangeText={(text) => setQuery(text)}
-            onSubmitEditing={getResults}
+            onChangeText={(text) => {
+              setQuery(text);
+              getResults(text);
+            }}
+            // onSubmitEditing={getResults}
             onClear={() => setResult([])}
             autoCorrect={false}
             value={query}
