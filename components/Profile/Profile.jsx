@@ -7,12 +7,13 @@ import {
 } from 'react-native';
 
 import { Text, Block, Card, Button } from 'galio-framework';
-import { Storage, API, graphqlOperation } from 'aws-amplify';
+import { Auth, Storage, API, graphqlOperation } from 'aws-amplify';
 import { getUserProfile, getUserFollowingByID } from '../../src/graphql/custom-queries';
 import { useContext } from 'react';
 import { userContext } from '../userContext';
 import styles, { placeholderImage } from '../styles';
 import { createFollowRequest } from '../../src/graphql/custom-mutations';
+import { useIsFocused } from '@react-navigation/native';
 
 
 
@@ -34,10 +35,12 @@ const Profile = ({navigation, route}) => {
     username: user.username,
     profilePictureKey: "",
   });
+
+  const isFocused = useIsFocused();
   
   useEffect(() => {
     getProfile();
-  }, []);
+  }, [isFocused]);
 
   async function fetchImages(uri) {
     if (!uri) {
@@ -54,6 +57,14 @@ const Profile = ({navigation, route}) => {
 
   const [ image, setImage ] = useState(placeholderImage);
   
+  async function signOut() {
+    try {
+      await Auth.signOut();
+    } catch (error) {
+      console.log('error signing out: ', error);
+    }
+  }
+
   async function getProfile() {
     try {
       await API.graphql(graphqlOperation(
@@ -153,6 +164,7 @@ const Profile = ({navigation, route}) => {
             <Button onPress={() => {
               navigation.navigate('Follow')
             }}>Follow Requests</Button>
+            <Button bottom onPress={signOut}>Sign Out</Button>
           </View>
         }
       </Block>

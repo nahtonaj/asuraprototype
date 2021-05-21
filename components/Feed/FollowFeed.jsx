@@ -7,6 +7,7 @@ import styles from '../styles';
 import { View, FlatList, TouchableOpacity, Image } from 'react-native';
 import { Text } from 'galio-framework';
 import { placeholderImage } from '../styles'
+import { useIsFocused } from '@react-navigation/native';
 
 
 const FollowContainer = ({ item }) => {
@@ -41,16 +42,20 @@ const FollowFeed = ({ navigation, route }) => {
 
   const [follows, setFollows] = useState([]);
 
+  const isFocused = useIsFocused();
+
   useEffect(() => {
     getFollows();
-  }, [])
+  }, [isFocused])
 
   async function getFollows() {
     await API.graphql(graphqlOperation(getUserFollowingExperiences, { id: user.attributes.sub }))
     .then((response) => {
       const whos = response.data.getUser.follows.items;
+      console.log("Got experiences: ", whos);
       const concatwhos = whos.reduce((a, b) => a.who.experiences.items.concat(b.who.experiences.items));
-      const experiences = concatwhos.who.experiences.items.sort((b, a) => a.createdAt.localeCompare(b.createdAt));
+      console.log("Reducing: ", concatwhos);
+      const experiences = concatwhos.sort((b, a) => a.createdAt.localeCompare(b.createdAt));
       setFollows(experiences);
       console.log(experiences);
     })
