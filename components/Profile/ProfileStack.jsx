@@ -12,7 +12,7 @@ const ProfileStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Profile" component={Profile} initialParams={{ 
-        id: user.profile.id,
+        id: user.attributes.sub,
         isOwnProfile: true,
         }} 
       />

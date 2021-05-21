@@ -38,7 +38,7 @@ const App = () =>  {
 
   const getUserInfo = async () => {
     try {
-      await Auth.currentAuthenticatedUser()
+      Auth.currentAuthenticatedUser()
       .then(async (u) => {
         const profileData = await API.graphql(graphqlOperation(
           getUserProfile, { id: u.attributes.sub }

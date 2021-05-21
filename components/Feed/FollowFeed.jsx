@@ -29,7 +29,7 @@ const FollowContainer = ({ item }) => {
       <TouchableOpacity>
         <Text style={{ fontSize: 20, fontWeight: '500' }}>{ item.name }</Text>
         <Image source={{ uri: image }} style={styles.friendProfilePicture} resizeMode={'cover'}/>
-        <Text>Click to match!</Text>
+        <Text>{item.story}</Text>
       </TouchableOpacity>
     </View>
   )
