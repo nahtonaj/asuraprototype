@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
+  Alert,
   Platform,
   View,
   Image,
@@ -18,7 +19,7 @@ import styles, { placeholderImage } from '../styles';
 
 
 
-const EditProfile = () => {
+const EditProfile = ({navigation, route}) => {
   const { user, setUser } = useContext(userContext);
 
   const blankProfile = {
@@ -106,6 +107,7 @@ const EditProfile = () => {
       delete profile.updatedAt;
       const profileData = await API.graphql(graphqlOperation(updateUser, { input: profile }))
       console.log("Updated profile: ", profileData);
+      navigation.navigate("Profile");
       return profileData.data.updateUser;
     } catch(err) {
       console.log("Error updating profile: ", err);
@@ -118,6 +120,7 @@ const EditProfile = () => {
       const profileData = await API.graphql(graphqlOperation(createUser, { input: profile }))
       console.log("Created profile: ", profileData);
       setExistingUser(true);
+      navigation.navigate("Profile");
       return profileData.data.createUser;
     } catch(err) {
       console.log("Error creating profile: ", err);

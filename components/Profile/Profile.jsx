@@ -95,16 +95,17 @@ const Profile = ({navigation, route}) => {
   return (
     <View style={styles.container}>
       <Block center>
-        <Card 
+        {
+          <Card 
           shadow
           borderless
           style={styles.card}
-          title={profile.name}
-          caption={`${profile.age}`}
+          title={profile.name ? profile.name : ""}
+          caption={`${profile.age ? profile.age : ""}`}
           imageStyle={styles.profilePicture}
           image={image}
-        >
-        </Card>
+          />
+        }
         {
           !isOwnProfile &&
           <Button onPress={addFollow}>Follow</Button>
