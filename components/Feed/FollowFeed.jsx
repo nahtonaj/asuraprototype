@@ -55,7 +55,7 @@ const FollowFeed = ({ navigation, route }) => {
       console.log("Got experiences: ", whos);
       const concatwhos = whos.reduce((a, b) => a.who.experiences.items.concat(b.who.experiences.items));
       console.log("Reducing: ", concatwhos);
-      const experiences = concatwhos.sort((b, a) => a.createdAt.localeCompare(b.createdAt));
+      const experiences = concatwhos.who.experiences.items.sort((b, a) => a.createdAt.localeCompare(b.createdAt));
       setFollows(experiences);
       console.log(experiences);
     })

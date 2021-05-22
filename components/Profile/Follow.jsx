@@ -26,7 +26,7 @@ const Follow = ({ navigation }) => {
     try {
       setIsLoading(true);
       const profileData = await API.graphql(graphqlOperation(
-        getUserFollow, { id: user.profile.id }
+        getUserFollow, { id: user.attributes.sub }
       ));
       const newprofile = profileData.data.getUser
       if (!newprofile) {
